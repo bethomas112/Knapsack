@@ -12,27 +12,44 @@ public class Dynamic {
    }
 
    public ArrayList<Item> solve(ArrayList<Item> items) {
-      ArrayList<Item> solved;
       int table[][] = buildTable(items);
-      for (Item i : items) {
-         System.out.println(i.toString());
-      }
 
-      printTable(table);
-
-
-      return new ArrayList<Item>();
+      return backTrace(table,items);
    }
 
    private void printTable(int[][] table) {
 
       for (int i = 0; i < table.length; i++) {
          for (int j = 0; j < table[0].length; j++) {
-            System.out.format("%4d", table[i][j]);
+            System.out.format("%5d", table[i][j]);
          }
          System.out.println();
       }
 
+   }
+
+   private ArrayList<Item> backTrace(int table[][], ArrayList<Item> items) {
+      ArrayList<Item> sol = new ArrayList<Item>();
+      int i = table.length - 1;
+      int j = table[0].length - 1;
+      int curVal;
+
+      while (i > 0 && j > 0) {
+         curVal = table[i][j];
+
+         if (curVal == table[i-1][j]) {
+         /*The ith item was not selected */
+            i--;
+         }
+         else /*if (curVal == table[i-1][j] + items.get(i-1).value)*/ {
+         /*The ith item was taken*/
+            sol.add(0, items.get(i -1));
+            i--;
+            j = j - items.get(i).weight;
+         }
+      }
+
+      return sol;
    }
 
    private int[][] buildTable(ArrayList<Item> items) {
@@ -46,6 +63,11 @@ public class Dynamic {
          }
          table[0][i] = 0;
       }
+
+      /*Loops through the entire table, and fills it based on the recurrence relation:
+      * V(i, j) = max{ V(i-1, j-w) + V(i), V(i-1, j) }
+      *                Take the item       Don't take the item
+      */
       for (int i = 1; i < items.size() + 1; i++) {
          cur = items.get(i - 1);
          for (int j = 1; j < capacity + 1; j++) {

@@ -36,8 +36,9 @@ public class Main {
             break;
          case 3 :
             Dynamic dyn = new Dynamic(capacity);
-            dyn.solve(items);
-            System.out.println("Shut up");
+            solved = dyn.solve(items);
+            System.out.println("Dynamic Programming solution: <" + totalValue(solved) + "> <" +
+                  totalWeight(solved) + ">");
             break;
          case 4 :
             System.out.println("Not yet implemented");

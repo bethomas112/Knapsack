@@ -14,7 +14,7 @@ public class Dynamic {
    public ArrayList<Item> solve(ArrayList<Item> items) {
       int table[][] = buildTable(items);
 
-      return backTrace(table,items);
+      return traceBack(table, items);
    }
 
    private void printTable(int[][] table) {
@@ -28,7 +28,7 @@ public class Dynamic {
 
    }
 
-   private ArrayList<Item> backTrace(int table[][], ArrayList<Item> items) {
+   private ArrayList<Item> traceBack(int table[][], ArrayList<Item> items) {
       ArrayList<Item> sol = new ArrayList<Item>();
       int i = table.length - 1;
       int j = table[0].length - 1;

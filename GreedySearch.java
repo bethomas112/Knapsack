@@ -24,8 +24,8 @@ public class GreedySearch {
 
 
       for (Item i : items) {
-         if ((i.getWeight() + weight) <= capacity) {
-            weight += i.getWeight();
+         if ((i.weight + weight) <= capacity) {
+            weight += i.weight;
             sol.add(i);
          }
       }

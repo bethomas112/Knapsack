@@ -35,7 +35,9 @@ public class Main {
              totalWeight(solved) + ">");
             break;
          case 3 :
-            System.out.println("Not yet implemented");
+            Dynamic dyn = new Dynamic(capacity);
+            dyn.solve(items);
+            System.out.println("Shut up");
             break;
          case 4 :
             System.out.println("Not yet implemented");
@@ -45,8 +47,8 @@ public class Main {
       Collections.sort(solved);
 
       for (Item i : solved) {
-         if (i.getValue() > 0 ) {
-            System.out.print("<" + i.getId() + "> ");
+         if (i.value > 0 ) {
+            System.out.print("<" + i.id + "> ");
          }
       }
 
@@ -57,7 +59,7 @@ public class Main {
       int total = 0;
 
       for (Item i : items) {
-         total += i.getValue();
+         total += i.value;
       }
       return total;
    }
@@ -65,7 +67,7 @@ public class Main {
    public static int totalWeight(ArrayList<Item> items) {
       int total = 0;
       for (Item i : items) {
-         total += i.getWeight();
+         total += i.weight;
       }
       return total;
    }

@@ -44,8 +44,8 @@ public class BruteForce {
       int totalWeight = 0;
 
       for (Item i : items) {
-         totalVal += i.getValue();
-         totalWeight += i.getWeight();
+         totalVal += i.value;
+         totalWeight += i.weight;
       }
 
       return totalWeight > capacity ? -1 : totalVal;

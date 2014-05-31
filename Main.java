@@ -1,9 +1,9 @@
-import javax.swing.text.DefaultEditorKit;
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -15,6 +15,8 @@ public class Main {
       ArrayList<Item> items = new ArrayList<Item>();
       int capacity = readInput(args[0], items);
       int choice = 0;
+      long startime, endtime, duration;
+      Timer timer = new Timer(0, null);
 
       Scanner scan = new Scanner(System.in);
       ArrayList<Item> solved = new ArrayList<Item>();
@@ -23,25 +25,37 @@ public class Main {
          switch (choice) {
             case 1:
                BruteForce brute = new BruteForce(capacity);
+               startime = System.nanoTime();
                solved = brute.fullEnum(items, 0);
+               endtime = System.nanoTime();
+               System.out.println("Total Time: " + (double)((endtime - startime) / 1000000000.0) + " seconds");
                System.out.println("Using Brute force the best feasible solution found: <" + totalValue(solved) + "> <" +
                      totalWeight(solved) + ">");
                break;
             case 2:
                GreedySearch greed = new GreedySearch(capacity);
+               startime = System.nanoTime();
                solved = greed.greedy(items);
+               endtime = System.nanoTime();
+               System.out.println("Total Time: " + (double)((endtime - startime) / 1000000000.0) + " seconds");
                System.out.println("Greedy solution (not necessarily optimal): <" + totalValue(solved) + "> <" +
                      totalWeight(solved) + ">");
                break;
             case 3:
                Dynamic dyn = new Dynamic(capacity);
+               startime = System.nanoTime();
                solved = dyn.solve(items);
+               endtime = System.nanoTime();
+               System.out.println("Total Time: " + (double)((endtime - startime) / 1000000000.0) + " seconds");
                System.out.println("Dynamic Programming solution: <" + totalValue(solved) + "> <" +
                      totalWeight(solved) + ">");
                break;
             case 4:
                BranchAndBound bAndB = new BranchAndBound(capacity);
+               startime = System.nanoTime();
                solved = bAndB.solve(items);
+               endtime = System.nanoTime();
+               System.out.println("Total Time: " + (double)((endtime - startime) / 1000000000.0) + " seconds");
                System.out.println("Using Branch and Bound the best feasible solution found: <" + totalValue(solved)
                      + "> <" + totalWeight(solved) + ">");
                break;

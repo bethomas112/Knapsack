@@ -24,6 +24,10 @@ public class Branch implements Comparable<Branch> {
       double max = 0.0;
       int weightLeft = remainingCapacity;
 
+      /* This bounding function computes the upper bound (max) by adding the 
+      * items with the best value to weight ratio one at a time until it reaches 
+      * an item that will not fit with the remaining capacity, it will then add a 
+      * fraction of that item until the max capacity is reached */
       for (int i = level; i < items.size() && weightLeft != 0; i++) {
          for (int k = items.get(i).weight; k > 0 && weightLeft != 0; k--, weightLeft--) {
             max += items.get(i).ratio;
